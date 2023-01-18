@@ -1,9 +1,14 @@
+//standard frontent for react with a spining logo
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 
-function App() {
+function App({ user, signOut }) {
   return (
     <div className="App">
+      {user.attributes.email}
+      <button onClick={signOut}>Sign Out</button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -22,4 +27,7 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App)/*, {
+  socialProviders: ['google']
+});
+*/

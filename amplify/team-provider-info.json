@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-artemisachat-dev-231214-authRole",
+      "UnauthRoleArn": "arn:aws:iam::501686901815:role/amplify-artemisachat-dev-231214-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::501686901815:role/amplify-artemisachat-dev-231214-authRole",
+      "Region": "eu-west-3",
+      "DeploymentBucketName": "amplify-artemisachat-dev-231214-deployment",
+      "UnauthRoleName": "amplify-artemisachat-dev-231214-unauthRole",
+      "StackName": "amplify-artemisachat-dev-231214",
+      "StackId": "arn:aws:cloudformation:eu-west-3:501686901815:stack/amplify-artemisachat-dev-231214/2d49f080-977d-11ed-b500-0e4afea85f10",
+      "AmplifyAppId": "d1gnscm1t1mzuw"
+    }
+  }
+}
