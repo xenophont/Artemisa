@@ -10,6 +10,17 @@
       "StackName": "amplify-artemisachat-dev-231214",
       "StackId": "arn:aws:cloudformation:eu-west-3:501686901815:stack/amplify-artemisachat-dev-231214/2d49f080-977d-11ed-b500-0e4afea85f10",
       "AmplifyAppId": "d1gnscm1t1mzuw"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1gnscm1t1mzuw",
+          "type": "cicd"
+        }
+      },
+      "auth": {
+        "artemisachat3d818186": {}
+      }
     }
   }
 }
