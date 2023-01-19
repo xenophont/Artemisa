@@ -20,7 +20,7 @@ function App({ user, signOut }) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React now
         </a>
       </header>
     </div>
