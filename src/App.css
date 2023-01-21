@@ -1,5 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,400&display=swap');
+
 .App {
   text-align: center;
+}
+
+.heading {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 2.5rem;
+  color: white;
+  margin: 0;
+}
+
+.gridmain {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.userbar {
+  background-color: #000;
+  color:white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+  margin: 10;
 }
 
 .App-logo {

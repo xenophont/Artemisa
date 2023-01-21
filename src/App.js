@@ -3,24 +3,32 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { withAuthenticator } from '@aws-amplify/ui-react';
+import OptionSelection from './Components/OptionSelection';
+import { arrayItems } from './Options/list'; 
 
 function App({ user, signOut }) {
   return (
     <div className="App">
-      {user.attributes.email}
-      <button onClick={signOut}>Sign Out</button>
+        <div className="userbar">
+          <span>user: {user.attributes.email}</span>
+          <button onClick={signOut}>Sign Out</button>
+        </div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>
+          Welcome to ArtemisaChat
+        </h1>
+
+        <OptionSelection arrayItems = { arrayItems } /> 
+
         <a
           className="App-link"
-          href="https://reactjs.org"
+          //email link
+          href="mailto:javier.deno@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React now
+          Contact
         </a>
       </header>
     </div>

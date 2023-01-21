@@ -141,6 +141,7 @@ const theme2 = {
 };
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AmplifyProvider theme={theme2}>
