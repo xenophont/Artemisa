@@ -1,25 +1,19 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-artemisachat-dev-231214-authRole",
-      "UnauthRoleArn": "arn:aws:iam::501686901815:role/amplify-artemisachat-dev-231214-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::501686901815:role/amplify-artemisachat-dev-231214-authRole",
+      "AuthRoleName": "amplify-amplify468a9c1e54da4-staging-153229-authRole",
+      "UnauthRoleArn": "arn:aws:iam::501686901815:role/amplify-amplify468a9c1e54da4-staging-153229-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::501686901815:role/amplify-amplify468a9c1e54da4-staging-153229-authRole",
       "Region": "eu-west-3",
-      "DeploymentBucketName": "amplify-artemisachat-dev-231214-deployment",
-      "UnauthRoleName": "amplify-artemisachat-dev-231214-unauthRole",
-      "StackName": "amplify-artemisachat-dev-231214",
-      "StackId": "arn:aws:cloudformation:eu-west-3:501686901815:stack/amplify-artemisachat-dev-231214/2d49f080-977d-11ed-b500-0e4afea85f10",
+      "DeploymentBucketName": "amplify-amplify468a9c1e54da4-staging-153229-deployment",
+      "UnauthRoleName": "amplify-amplify468a9c1e54da4-staging-153229-unauthRole",
+      "StackName": "amplify-amplify468a9c1e54da4-staging-153229",
+      "StackId": "arn:aws:cloudformation:eu-west-3:501686901815:stack/amplify-amplify468a9c1e54da4-staging-153229/d0fdbb60-99a0-11ed-9e24-0a39eddbcbe6",
       "AmplifyAppId": "d1gnscm1t1mzuw"
     },
     "categories": {
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d1gnscm1t1mzuw",
-          "type": "cicd"
-        }
-      },
       "auth": {
-        "artemisachat3d818186": {}
+        "artemisachat": {}
       }
     }
   }
