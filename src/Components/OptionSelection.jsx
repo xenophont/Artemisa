@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function OptionSelection(
-    { arrayItems } // props
+    { arrayItems , selectOption } // props
 ){
     return (
         <>
@@ -9,7 +9,7 @@ export default function OptionSelection(
 
             <div className="grid-main">
                 {arrayItems.map((item) => {
-                    return <div>
+                    return <div className="grid-child" onClick={() => selectOption(item.option)}>
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
                     </div>
