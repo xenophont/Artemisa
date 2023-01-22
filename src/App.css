@@ -8,6 +8,20 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.footer {
+  font-family: 'Poppins', sans-serif;
+  background-color: #212121;
+  color:whitesmoke;
+  font-weight: 200;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+}
+
 .grid-main {
   display: grid;
   grid-template-columns: auto auto;
@@ -21,6 +35,7 @@
   border-radius: 15px;
   padding: 10px;
   cursor: pointer;
+  margin: 10px;
 }
 
 .grid-child:hover {
@@ -40,6 +55,10 @@
   font-size: 15px;
 }
 
+.translation-area {
+  display: contents;
+}
+
 .text-area {
   font-size: 20px;
   padding: 10px;
@@ -51,12 +70,12 @@
   height: 50px;
   font-size: 20px;
   margin-top: 20px;
-  cursor: pointer;
+  cursor: pointer ;
 }
 
 
 .userbar {
-  background-color: #000;
+  background-color: #212121;
   color:white;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
@@ -89,6 +108,9 @@
 
 .App-link {
   color: #61dafb;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 @keyframes App-logo-spin {

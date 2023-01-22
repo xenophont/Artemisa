@@ -1,23 +1,41 @@
-//standard frontent for react with a spining logo
 import React, { useState } from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Configuration, OpenAIApi } from 'openai';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import OptionSelection from './Components/OptionSelection';
 import Translation from './Components/Translation';
 import { arrayItems } from './Options/list'; 
 import artemisaLogo from './Assets/Artemisa-logo-clean.png';
 
+import Layout from './Components/Layout';
+import Privacy from './Pages/Privacy';
+import Terms from './Pages/Terms';
+import Home from './Pages/Home';
+
 function App({ user, signOut }) {
+
+  const configuration = new Configuration({
+    organization: process.env.REACT_APP_OPENAI_ORGANIZATION,
+    apiKey: process.env.REACT_APP_Open_AI_Key,
+  });
+  const openai = new OpenAIApi(configuration);
 
   const [selectedOption, setSelectedOption] = useState({});
   const [input, setInput] = useState(''); //input from user
 
-  const selectOption = (option) => {
-    setSelectedOption(option);
+  const selectOption = (selectedOption) => {
+    setSelectedOption(selectedOption);
   }
   
-  const doStuff = () => {
-  };
+  const doStuff = async () => {
+    let object = {...selectedOption, prompt: input };
+    console.log(configuration);
+    
+    const response = await openai.createCompletion(object);
+
+    console.log(response.data.choices[0].text);
+  }
 
   return (
     <div className="App">
@@ -48,6 +66,20 @@ function App({ user, signOut }) {
           Contact
         </a>
       </header>
+      <footer className='footer'>
+        <p>Powered by OpenAI</p>
+        <a className="App-link" href="/termsandservices.html">Privacy Policy</a>
+        <a className="App-link"href="/termsandservices.html" >Terms and Services</a>
+      </footer>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blogs" element={<Privacy />} />
+          <Route path="contact" element={<Terms />} />
+        </Route>
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
