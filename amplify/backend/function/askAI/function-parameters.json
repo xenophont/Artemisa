@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "serviceUrl",
+      "environmentVariableName": "SERVICE_URL"
+    }
+  ],
+  "secretNames": [
+    "openai_apikey",
+    "openai_organization"
+  ]
+}

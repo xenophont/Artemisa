@@ -8,10 +8,12 @@ import Translation from './Components/Translation';
 import { arrayItems } from './Options/list'; 
 import artemisaLogo from './Assets/Artemisa-logo-clean.png';
 
+
 import Layout from './Components/Layout';
 import Privacy from './Pages/Privacy';
 import Terms from './Pages/Terms';
 import Home from './Pages/Home';
+
 
 function App({ user, signOut }) {
 
