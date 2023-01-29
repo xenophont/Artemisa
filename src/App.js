@@ -7,7 +7,7 @@ import OptionSelection from './Components/OptionSelection';
 import Translation from './Components/Translation';
 import { arrayItems } from './Options/list'; 
 import artemisaLogo from './Assets/Artemisa-logo-clean.png';
-
+import axios from 'axios';
 
 import Layout from './Components/Layout';
 import Privacy from './Pages/Privacy';
@@ -17,6 +17,7 @@ import Home from './Pages/Home';
 
 function App({ user, signOut }) {
 
+  const askOpenai = 'https://zdnqgio3sm3rr4oil75xgvhtby0ptzpd.lambda-url.eu-west-3.on.aws/';
   const configuration = new Configuration({
     organization: process.env.REACT_APP_OPENAI_ORGANIZATION,
     apiKey: process.env.REACT_APP_Open_AI_Key,
@@ -34,7 +35,13 @@ function App({ user, signOut }) {
     let object = {...selectedOption, prompt: input };
     console.log(configuration);
     
-    const response = await openai.createCompletion(object);
+    try {
+      const response = await axios.post(lambdaFunctionEndpoint, {
+        selectedOption
+      });
+    } catch (error) {
+      console.error(error);
+    }
 
     console.log(response.data.choices[0].text);
   }
