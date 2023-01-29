@@ -31,9 +31,15 @@ export const arrayItems = [
         }
     },
     {
-        name : 'Brainstorming',
-        id: 'brainstorming',
-        description: "Brainstorm ideas with an Implementation Manager"
+        name : 'Test',
+        id: 'test',
+        description: "I want to test the bot",
+        option:{
+            "model": "text-davinci-003",
+            "prompt": "Say this is a test",
+            "max_tokens": 7,
+            "temperature": 0
+          }
     },
     {
         name : 'Summarize Technical',

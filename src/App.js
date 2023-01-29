@@ -7,7 +7,7 @@ import OptionSelection from './Components/OptionSelection';
 import Translation from './Components/Translation';
 import { arrayItems } from './Options/list'; 
 import artemisaLogo from './Assets/Artemisa-logo-clean.png';
-import axios from 'axios';
+
 
 import Layout from './Components/Layout';
 import Privacy from './Pages/Privacy';
@@ -20,26 +20,22 @@ function App({ user, signOut }) {
   const askOpenai = 'https://zdnqgio3sm3rr4oil75xgvhtby0ptzpd.lambda-url.eu-west-3.on.aws/';
   const [selectedOption, setSelectedOption] = useState({});
   const [input, setInput] = useState(''); //input from user
-
+  const [response, setResponse] = useState(""); //response from openai
   const selectOption = (selectedOption) => {
     setSelectedOption(selectedOption);
   }
-  
+
   const doStuff = async () => {
     let object = {...selectedOption, prompt: input };
     console.log(selectedOption);
-    const response = {};
-    try {
-      response = await axios.get(askOpenai, {
-        "model": "text-davinci-003",
-        "prompt": "Say this is a test",
-        "max_tokens": 7,
-        "temperature": 0
-      });
-    } catch (error) {
-      console.error(error);
-    }
-
+    
+    const res = await fetch(askOpenai, {
+      method: "POST",
+      body: JSON.stringify(selectedOption)
+    });
+    const json = await res.json();
+    setResponse(json.response);
+    console.log(response);
     console.log(response.data.choices[0].text);
   }
 
