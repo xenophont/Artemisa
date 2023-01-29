@@ -14,5 +14,12 @@
   "secretNames": [
     "openai_apikey",
     "openai_organization"
-  ]
+  ],
+  "permissions": {
+    "auth": {
+      "artemisachat": [
+        "read"
+      ]
+    }
+  }
 }

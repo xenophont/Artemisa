@@ -1,4 +1,8 @@
-const AWS = require('aws-sdk');
+/* Amplify Params - DO NOT EDIT
+	AUTH_ARTEMISACHAT_USERPOOLID
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT */const AWS = require('aws-sdk');
 const openai = require('openai');
 
 exports.handler = async (event, context) => {

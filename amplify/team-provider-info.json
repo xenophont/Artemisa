@@ -19,7 +19,7 @@
         "askAI": {
           "secretsPathAmplifyAppId": "d1gnscm1t1mzuw",
           "deploymentBucketName": "amplify-amplify468a9c1e54da4-staging-153229-deployment",
-          "s3Key": "amplify-builds/askAI-6657534e7a5473475955-build.zip",
+          "s3Key": "amplify-builds/askAI-4d633754456e466a6b62-build.zip",
           "serviceUrl": "https://www.artemisasolutions.eu"
         }
       }

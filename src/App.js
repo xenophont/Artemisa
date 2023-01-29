@@ -37,7 +37,14 @@ function App({ user, signOut }) {
     const response = {};
     try {
       response = await axios.post(askOpenai, {
-        selectedOption
+        "model": "text-davinci-003",
+        "prompt": "Say this is a test",
+        "max_tokens": 7,
+        "temperature": 0,
+        "top_p": 1,
+        "n": 1,
+        "stream": false,
+        "logprobs": null
       });
     } catch (error) {
       console.error(error);

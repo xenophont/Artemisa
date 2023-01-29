@@ -35,7 +35,15 @@
   "function": {
     "askAI": {
       "build": true,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "artemisachat"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
