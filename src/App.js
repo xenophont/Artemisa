@@ -34,9 +34,9 @@ function App({ user, signOut }) {
   const doStuff = async () => {
     let object = {...selectedOption, prompt: input };
     console.log(configuration);
-    
+    const response = {};
     try {
-      const response = await axios.post(lambdaFunctionEndpoint, {
+      response = await axios.post(askOpenai, {
         selectedOption
       });
     } catch (error) {
