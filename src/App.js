@@ -18,12 +18,6 @@ import Home from './Pages/Home';
 function App({ user, signOut }) {
 
   const askOpenai = 'https://zdnqgio3sm3rr4oil75xgvhtby0ptzpd.lambda-url.eu-west-3.on.aws/';
-  const configuration = new Configuration({
-    organization: process.env.REACT_APP_OPENAI_ORGANIZATION,
-    apiKey: process.env.REACT_APP_Open_AI_Key,
-  });
-  const openai = new OpenAIApi(configuration);
-
   const [selectedOption, setSelectedOption] = useState({});
   const [input, setInput] = useState(''); //input from user
 
@@ -33,18 +27,14 @@ function App({ user, signOut }) {
   
   const doStuff = async () => {
     let object = {...selectedOption, prompt: input };
-    console.log(configuration);
+    console.log(selectedOption);
     const response = {};
     try {
-      response = await axios.post(askOpenai, {
+      response = await axios.get(askOpenai, {
         "model": "text-davinci-003",
         "prompt": "Say this is a test",
         "max_tokens": 7,
-        "temperature": 0,
-        "top_p": 1,
-        "n": 1,
-        "stream": false,
-        "logprobs": null
+        "temperature": 0
       });
     } catch (error) {
       console.error(error);
