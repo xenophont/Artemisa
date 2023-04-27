@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-amplify468a9c1e54da4-staging-153229-unauthRole",
       "StackName": "amplify-amplify468a9c1e54da4-staging-153229",
       "StackId": "arn:aws:cloudformation:eu-west-3:501686901815:stack/amplify-amplify468a9c1e54da4-staging-153229/d0fdbb60-99a0-11ed-9e24-0a39eddbcbe6",
-      "AmplifyAppId": "d1gnscm1t1mzuw"
+      "AmplifyAppId": "d1gnscm1t1mzuw",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-amplify468a9c1e54da4-staging-153229-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
@@ -19,9 +20,12 @@
         "askAI": {
           "secretsPathAmplifyAppId": "d1gnscm1t1mzuw",
           "deploymentBucketName": "amplify-amplify468a9c1e54da4-staging-153229-deployment",
-          "s3Key": "amplify-builds/askAI-4d633754456e466a6b62-build.zip",
+          "s3Key": "amplify-builds/askAI-416162594c424a2b6638-build.zip",
           "serviceUrl": "https://www.artemisasolutions.eu"
         }
+      },
+      "api": {
+        "restApi": {}
       }
     }
   }

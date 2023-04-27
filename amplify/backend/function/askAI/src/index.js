@@ -6,6 +6,37 @@ Amplify Params - DO NOT EDIT */
 const AWS = require('aws-sdk');
 const { Configuration, OpenAIApi } = require("openai");
 
+// https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/getting-started.html
+
+import {
+    SecretsManagerClient,
+    GetSecretValueCommand,
+  } from "@aws-sdk/client-secrets-manager";
+  
+  const secret_name = "openai-api-key";
+  
+  const client = new SecretsManagerClient({
+    region: "eu-west-3",
+  });
+  
+  let response;
+  
+  try {
+    response = await client.send(
+      new GetSecretValueCommand({
+        SecretId: secret_name,
+        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+      })
+    );
+  } catch (error) {
+    // For a list of exceptions thrown, see
+    // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+    throw error;
+  }
+  
+  const secret = response.SecretString;
+  
+
 exports.handler = async (event, context) => {
     const ssm = new AWS.SSM();
     const parameterName = process.env.openai_apikey;
@@ -17,9 +48,11 @@ exports.handler = async (event, context) => {
         console.log(`Error retrieving parameter: ${parameterName}`);
         return err;
     }
+
+    
     
     const configuration = new Configuration({
-      apiKey: openaiApiKey,
+      apiKey: secret,
     });
     const openai = new OpenAIApi(configuration);
     const { model, prompt, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, stop } = event;
