@@ -1,77 +1,31 @@
-/* Amplify Params - DO NOT EDIT
-	AUTH_ARTEMISACHAT_USERPOOLID
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT */
 const AWS = require('aws-sdk');
+const secretsManager = new AWS.SecretsManager();
 const { Configuration, OpenAIApi } = require("openai");
 
-// https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/getting-started.html
+exports.handler = async (event) => {
+  const secretId = 'openai-api-key'; // Reemplaza con el nombre de tu secreto
+  const secretValue = await secretsManager.getSecretValue({ SecretId: secretId }).promise();
+  const apiKey = JSON.parse(secretValue.SecretString).OPENAI_API_KEY;
 
-import {
-    SecretsManagerClient,
-    GetSecretValueCommand,
-  } from "@aws-sdk/client-secrets-manager";
-  
-  const secret_name = "openai-api-key";
-  
-  const client = new SecretsManagerClient({
-    region: "eu-west-3",
+  const configuration = new Configuration({
+    apiKey: apiKey,
+  });
+  const openai = new OpenAIApi(configuration);
+  // A continuación, usa el SDK de OpenAI para interactuar con la API de OpenAI
+  // Aquí tienes un ejemplo para realizar una llamada a la API de completions
+
+  // Obtén messages del evento o establece un valor predeterminado
+  const messages = event.messages || [{"role": "user", "content": "Hello!"}];
+
+  const completion = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: messages,
   });
   
-  let response;
-  
-  try {
-    response = await client.send(
-      new GetSecretValueCommand({
-        SecretId: secret_name,
-        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
-      })
-    );
-  } catch (error) {
-    // For a list of exceptions thrown, see
-    // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-    throw error;
-  }
-  
-  const secret = response.SecretString;
-  
+  //console.log(completion.data.choices[0].message);
 
-exports.handler = async (event, context) => {
-    const ssm = new AWS.SSM();
-    const parameterName = process.env.openai_apikey;
-    let openaiApiKey;
-    try {
-        const data = await ssm.getParameter({ Name: parameterName, WithDecryption: true }).promise();
-        openaiApiKey = data.Parameter.Value;
-    } catch (err) {
-        console.log(`Error retrieving parameter: ${parameterName}`);
-        return err;
-    }
-
-    
-    
-    const configuration = new Configuration({
-      apiKey: secret,
-    });
-    const openai = new OpenAIApi(configuration);
-    const { model, prompt, temperature, max_tokens, top_p, frequency_penalty, presence_penalty, stop } = event;
-
-    try {
-        const response = await openai.createCompletion({
-            prompt: prompt,
-            model: model,
-            temperature: temperature,
-            max_tokens: max_tokens,
-            top_p: top_p,
-            frequency_penalty: frequency_penalty,
-            presence_penalty: presence_penalty,
-            stop: stop
-        });
-        console.log(response.data.choices[0].text)
-        return response.data.choices[0].text;
-    } catch (err) {
-        console.log(`Error generating response: ${err}`);
-        return err;
-    }
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: completion.data.choices[0].message.content.trim() }),
+  };
 };
