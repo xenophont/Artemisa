@@ -9,6 +9,7 @@ import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
 import { AmplifyProvider } from '@aws-amplify/ui-react';  
 import { defaultDarkModeOverride } from '@aws-amplify/ui-react';
+import AWS from 'aws-sdk';
 
 Amplify.configure(config);
 AWS.config.update({
