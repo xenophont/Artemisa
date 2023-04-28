@@ -13,7 +13,7 @@ import { API } from 'aws-amplify';
 
 async function callAskAIStaging(messages) {
   try {
-    const response = await API.post('api_name', '/askai-staging', {
+    const response = await API.post('restApi', '/askai-staging', {
       body: {
         messages: messages,
       },
