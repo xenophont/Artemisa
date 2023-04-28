@@ -8,7 +8,7 @@ import Translation from './Components/Translation';
 import { arrayItems } from './Options/list'; 
 import artemisaLogo from './Assets/Artemisa-logo-clean.png';
 import { Amplify } from 'aws-amplify';
-import config from './aws-exports'
+import config from './aws-exports';
 import { API } from 'aws-amplify';
 
 import Layout from './Components/Layout';
