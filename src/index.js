@@ -9,15 +9,34 @@ import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
 import { AmplifyProvider } from '@aws-amplify/ui-react';  
 import { defaultDarkModeOverride } from '@aws-amplify/ui-react';
-import AWS from 'aws-sdk';
+import { API } from 'aws-amplify';
 
-Amplify.configure(config);
-AWS.config.update({
-  region: 'eu-west-3', // Reemplaza con tu región de AWS
-  // Puedes incluir tus credenciales aquí si es necesario,
-  // pero es mejor utilizar roles de IAM y configurar las credenciales en el entorno
+async function callAskAIStaging(messages) {
+  try {
+    const response = await API.post('api_name', '/askai-staging', {
+      body: {
+        messages: messages,
+      },
+    });
+
+    // Maneja la respuesta de la función Lambda
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error('Error al llamar a la función Lambda askAI-staging:', error);
+  }
+}
+
+const messages = [
+  { role: 'system', content: 'Estás chateando con un IA entrenada en una variedad de temas.' },
+  { role: 'user', content: '¿Cuáles son los beneficios de la inteligencia artificial?' },
+];
+
+callAskAIStaging(messages).then((response) => {
+  console.log('Respuesta de la función Lambda:', response);
 });
 
+/*
 const callLambdaFunction = async (messages) => {
   const lambda = new AWS.Lambda();
 
@@ -46,8 +65,8 @@ const messages = [
   { role: 'user', content: '¿Cuáles son los beneficios de la inteligencia artificial?' },
 ];
 
-callLambdaFunction(messages);
-
+//callLambdaFunction(messages);
+*/
 
 const theme = {
   name: 'myTheme',
