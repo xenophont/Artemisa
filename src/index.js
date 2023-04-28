@@ -5,36 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@aws-amplify/ui-react/styles.css'
 
-import { Amplify } from 'aws-amplify';
-import config from './aws-exports';
+;
 import { AmplifyProvider } from '@aws-amplify/ui-react';  
 import { defaultDarkModeOverride } from '@aws-amplify/ui-react';
-import { API } from 'aws-amplify';
 
-async function callAskAIStaging(messages) {
-  try {
-    const response = await API.post('restApi', '/askai-staging', {
-      body: {
-        messages: messages,
-      },
-    });
 
-    // Maneja la respuesta de la función Lambda
-    console.log(response);
-    return response;
-  } catch (error) {
-    console.error('Error al llamar a la función Lambda askAI-staging:', error);
-  }
-}
 
-const messages = [
-  { role: 'system', content: 'Estás chateando con un IA entrenada en una variedad de temas.' },
-  { role: 'user', content: '¿Cuáles son los beneficios de la inteligencia artificial?' },
-];
-
-callAskAIStaging(messages).then((response) => {
-  console.log('Respuesta de la función Lambda:', response);
-});
 
 /*
 const callLambdaFunction = async (messages) => {

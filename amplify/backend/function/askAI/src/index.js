@@ -14,6 +14,8 @@ exports.handler = async (event) => {
   // A continuación, usa el SDK de OpenAI para interactuar con la API de OpenAI
   // Aquí tienes un ejemplo para realizar una llamada a la API de completions
 
+   // Extrae el cuerpo de la solicitud y parsea el contenido JSON
+  //const requestBody = JSON.parse(event.body);
   // Obtén messages del evento o establece un valor predeterminado
   const messages = event.messages || [{"role": "user", "content": "Hello!"}];
 
@@ -26,6 +28,10 @@ exports.handler = async (event) => {
 
   return {
     statusCode: 200,
+    headers: {
+    "Access-Control-Allow-Origin": "*", // Ajusta esto al dominio específico en producción
+    "Access-Control-Allow-Credentials": true,
+  },
     body: JSON.stringify({ message: completion.data.choices[0].message.content.trim() }),
   };
 };
