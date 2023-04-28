@@ -9,28 +9,44 @@ import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
 import { AmplifyProvider } from '@aws-amplify/ui-react';  
 import { defaultDarkModeOverride } from '@aws-amplify/ui-react';
-import { API } from 'aws-amplify';
 
 Amplify.configure(config);
-// prueba de askai
-// Reemplaza "YourLambdaFunctionName" con el nombre de tu función Lambda
-const callLambdaFunction = async () => {
-  const response = await API.post('askAI-staging', '/items', {
-    body: {
-      messages: [
-        {
-          role: 'user',
-          content: 'tell me a short story'
-        }
-      ]
-    }
-  });
+AWS.config.update({
+  region: 'eu-west-3', // Reemplaza con tu región de AWS
+  // Puedes incluir tus credenciales aquí si es necesario,
+  // pero es mejor utilizar roles de IAM y configurar las credenciales en el entorno
+});
 
-  console.log(response);
+const callLambdaFunction = async (messages) => {
+  const lambda = new AWS.Lambda();
+
+  const params = {
+    FunctionName: 'askAI-staging', // Reemplaza con el nombre de tu función Lambda
+    InvocationType: 'RequestResponse',
+    Payload: JSON.stringify({ messages }),
+  };
+
+  try {
+    const response = await lambda.invoke(params).promise();
+    const responseBody = JSON.parse(response.Payload);
+    console.log(responseBody);
+
+    // Utiliza la respuesta de la función Lambda como desees
+    // Por ejemplo, actualiza el estado de un componente de React o muestra la información en la UI
+  } catch (error) {
+    console.error('Error al llamar a la función Lambda:', error);
+  }
 };
 
-// Llama a la función Lambda
-callLambdaFunction();
+
+// Llama a la función Lambda con un mensaje como entrada
+const messages = [
+  { role: 'system', content: 'Estás chateando con un IA entrenada en una variedad de temas.' },
+  { role: 'user', content: '¿Cuáles son los beneficios de la inteligencia artificial?' },
+];
+
+callLambdaFunction(messages);
+
 
 const theme = {
   name: 'myTheme',
