@@ -9,8 +9,28 @@ import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
 import { AmplifyProvider } from '@aws-amplify/ui-react';  
 import { defaultDarkModeOverride } from '@aws-amplify/ui-react';
+import { API } from 'aws-amplify';
 
 Amplify.configure(config);
+// prueba de askai
+// Reemplaza "YourLambdaFunctionName" con el nombre de tu función Lambda
+const callLambdaFunction = async () => {
+  const response = await API.post('askAI-staging', '/items', {
+    body: {
+      messages: [
+        {
+          role: 'user',
+          content: 'tell me a short story'
+        }
+      ]
+    }
+  });
+
+  console.log(response);
+};
+
+// Llama a la función Lambda
+callLambdaFunction();
 
 const theme = {
   name: 'myTheme',
