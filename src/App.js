@@ -9,7 +9,7 @@ import { arrayItems } from './Options/list';
 import artemisaLogo from './Assets/Artemisa-logo-clean.png';
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
-import { API } from 'aws-amplify';
+import { API, Auth } from 'aws-amplify';
 
 import Layout from './Components/Layout';
 import Privacy from './Pages/Privacy';
@@ -20,8 +20,20 @@ Amplify.configure(config);
 const apiName = config.aws_cloud_logic_custom[0].name;
 
 async function callAskAIStaging(jsonString) {
+  // Obtén el objeto de sesión actual
+  const session = await Auth.currentSession();
+  // Extrae el token de acceso del objeto de sesión
+  const accessToken = session.getAccessToken().getJwtToken();
+
+  // Configura los encabezados con el token de acceso
+  const requestHeaders = {
+    Authorization: accessToken,
+    'Content-Type': 'application/json',
+  };
+
   try {   
     const response = await API.post(apiName, '/askai-staging', {
+      headers: requestHeaders,
       body: jsonString ,
     }); 
 
