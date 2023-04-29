@@ -19,12 +19,10 @@ import Home from './Pages/Home';
 Amplify.configure(config);
 const apiName = config.aws_cloud_logic_custom[0].name;
 
-async function callAskAIStaging(messages) {
-  try {
+async function callAskAIStaging(jsonString) {
+  try {   
     const response = await API.post(apiName, '/askai-staging', {
-      body: {
-        messages: messages,
-      },
+      body: jsonString ,
     }); 
 
     // Maneja la respuesta de la función Lambda
@@ -43,20 +41,9 @@ function App({ user, signOut }) {
     { role: 'user', content: '¿Cuáles son los beneficios de la inteligencia artificial?' },
   ];
 
-  const payload = {
-    "messages": [
-      {
-        "role": "system",
-        "content": "Estás chateando con un IA entrenada en una variedad de temas."
-      },
-      {
-        "role": "user",
-        "content": "¿Cuáles son los beneficios de la inteligencia artificial?"
-      }
-    ]
-  }
-    
-  callAskAIStaging(payload).then((response) => {
+  const jsonString = JSON.stringify({ messages: messages });
+  console.log(jsonString);
+  callAskAIStaging(jsonString).then((response) => {
     console.log('Respuesta de la función Lambda:', response);
   });
   

@@ -11,26 +11,33 @@ exports.handler = async (event) => {
     apiKey: apiKey,
   });
   const openai = new OpenAIApi(configuration);
-  // A continuación, usa el SDK de OpenAI para interactuar con la API de OpenAI
-  // Aquí tienes un ejemplo para realizar una llamada a la API de completions
 
-   // Extrae el cuerpo de la solicitud y parsea el contenido JSON
-  //const requestBody = JSON.parse(event.body);
-  // Obtén messages del evento o establece un valor predeterminado
-  const messages = event.messages || [{"role": "user", "content": "Hello!"}];
+  let parsedEvent;
+  if (typeof event === 'string') {
+    // Si el evento es de tipo cadena, parsearlo como JSON
+    parsedEvent = JSON.parse(event);
+  } else {
+    // Si el evento no es de tipo cadena, asumir que ya es un objeto
+    parsedEvent = event;
+  }
+  const messages = parsedEvent.messages || [{"role": "user", "content": "Hello!"}];
+
+  console.log('Evento recibido:', parsedEvent);
+  console.log('Cuerpo del evento:', messages);
 
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: messages,
+    messages: messages, 
   });
   
-  //console.log(completion.data.choices[0].message);
-
+ 
   return {
     statusCode: 200,
     headers: {
     "Access-Control-Allow-Origin": "*", // Ajusta esto al dominio específico en producción
     "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Headers" : "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
   },
     body: JSON.stringify({ message: completion.data.choices[0].message.content.trim() }),
   };
