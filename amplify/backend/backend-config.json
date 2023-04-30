@@ -70,6 +70,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_APIGatewayAuthLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "APIGatewayAuthLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_APIGatewayAuthLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "APIGatewayAuthLambda"
+        }
+      ]
+    },
     "AMPLIFY_function_askAI_deploymentBucketName": {
       "usedBy": [
         {

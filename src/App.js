@@ -23,21 +23,33 @@ async function callAskAIStaging(jsonString) {
   // Obtén el objeto de sesión actual
   const session = await Auth.currentSession();
   // Extrae el token de acceso del objeto de sesión
-  const accessToken = session.getAccessToken().getJwtToken();
+  //const accessToken = session.getAccessToken().getJwtToken();
   
   //console.log(session);
-  console.log(accessToken);
+  //console.log(accessToken);
+  /*
   //// Configura los encabezados con el token de acceso
   const requestHeaders = {
     'Authorization': `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
-  const myInit = {
-    headers: {
+  */
+  const idToken = session.getIdToken().getJwtToken();
+/*
+{
       Authorization: `Bearer ${(await Auth.currentSession())
         .getIdToken()
         .getJwtToken()}`,
-    },
+    }
+    */
+  // Configura los encabezados con el token de ID
+  const requestHeaders = {
+    'Authorization': `Bearer ${idToken}`,
+    'Content-Type': 'application/json',
+  };
+  console.log(idToken);
+  const myInit = {
+    headers: requestHeaders,
     body: jsonString ,
   };
   //console.log(requestHeaders);
