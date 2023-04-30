@@ -24,19 +24,31 @@ async function callAskAIStaging(jsonString) {
   const session = await Auth.currentSession();
   // Extrae el token de acceso del objeto de sesión
   const accessToken = session.getAccessToken().getJwtToken();
-
-  // Configura los encabezados con el token de acceso
+  
+  //console.log(session);
+  console.log(accessToken);
+  //// Configura los encabezados con el token de acceso
   const requestHeaders = {
-    Authorization: accessToken,
+    'Authorization': `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
-
-  try {   
-    const response = await API.post(apiName, '/askai-staging', {
+  const myInit = {
+    headers: {
+      Authorization: `Bearer ${(await Auth.currentSession())
+        .getIdToken()
+        .getJwtToken()}`,
+    },
+    body: jsonString ,
+  };
+  //console.log(requestHeaders);
+  /*try {   
+    const response = await API.post(apiName, '/askai-staging', {  
       headers: requestHeaders,
       body: jsonString ,
     }); 
-
+*/
+    try {   
+    const response = await API.post(apiName, '/askai-staging', myInit);   
     // Maneja la respuesta de la función Lambda
     console.log(response);
     return response;
