@@ -19,54 +19,48 @@ import Home from './Pages/Home';
 Amplify.configure(config);
 const apiName = config.aws_cloud_logic_custom[0].name;
 
-async function callAskAIStaging(jsonString) {
-  // Obtén el objeto de sesión actual
-  const session = await Auth.currentSession();
-  const idToken = session.getIdToken().getJwtToken();
-/*
-{
-      Authorization: `Bearer ${(await Auth.currentSession())
-        .getIdToken()
-        .getJwtToken()}`,
-    }
-    */
-  // Configura los encabezados con el token de ID
-  const requestHeaders = {
-    'Authorization': `Bearer ${idToken}`,
-    'Content-Type': 'application/json',
-  };
-  console.log(idToken);
-  const myInit = {
-    headers: requestHeaders,
-    body: jsonString ,
-  };
-  
-  try {   
-    const response = await API.post(apiName, '/askai-staging', myInit);   
-    // Maneja la respuesta de la función Lambda
-    console.log(response);
-    return response;
-  } catch (error) {
-    console.error('Error al llamar a la función Lambda askAI-staging:', error);
-  }
-}
-
 
 
 function App({ user, signOut }) {
 
- /* const messages = [
-    { role: 'system', content: 'Estás chateando con un IA entrenada en una variedad de temas.' },
-    { role: 'user', content: '¿Cuáles son los beneficios de la inteligencia artificial?' },
-  ];
-
-  const jsonString = JSON.stringify({ messages: messages });
-  console.log(jsonString);
-  callAskAIStaging(jsonString).then((response) => {
+  async function callAskAIStaging(messagesList) {
+    // Obtén el objeto de sesión actual
+    const session = await Auth.currentSession();
+    const idToken = session.getIdToken().getJwtToken();
+  
+    // Configura los encabezados con el token de ID
+    const requestHeaders = {
+      'Authorization': `Bearer ${idToken}`,
+      'Content-Type': 'application/json',
+    };
+  
+    const myInit = {
+      headers: requestHeaders,
+      body: JSON.stringify({ messages: messagesList }),
+    };
+  
+    try {
+      const response = await API.post(apiName, '/askai-staging', myInit);
+      return response;
+    } catch (error) {
+      console.error('Error al llamar a la función Lambda askAI-staging:', error);
+    }
+  }
+  
+  const handleUserMessage = async (userInput) => {
+    const newMessagesList = [...messagesList, { role: 'user', content: userInput }];
+    setMessagesList(newMessagesList);
+  
+    const response = await callAskAIStaging(newMessagesList);
     console.log('Respuesta de la función Lambda:', response);
-  });
-*/
-/*
+  
+    if (response && response.choices && response.choices.length > 0) {
+      const aiResponse = response.choices[0].text.trim();
+      const updatedMessagesList = [...newMessagesList, { role: 'ai', content: aiResponse }];
+      setMessagesList(updatedMessagesList);
+    }
+  };
+
   // Lista de mensajes
   const [messagesList, setMessagesList] = useState([]);
 
@@ -84,23 +78,9 @@ function App({ user, signOut }) {
     return transformedMessages;
   };
 
-  // Ejemplo de cómo usar la función transformMessageFormat
-  const exampleInput = {
-    messages: {
-      system: 'You are an implementation manager from adyen. Ask me questions about my project such as channel, numbers of devs, and go-live date.',
-      user: 'Hello dear implementation manager. Shall we start?',
-    },
-  };
-  const transformedMessages = transformMessageFormat(exampleInput);
-  console.log('Transformed Messages:', transformedMessages);
- 
-  addMessages(transformedMessages);
-  console.log('Mensajes en la lista:', messagesList);
-*/
-  //const askOpenai = 'https://zdnqgio3sm3rr4oil75xgvhtby0ptzpd.lambda-url.eu-west-3.on.aws/';
+  
   const [selectedOption, setSelectedOption] = useState({});
   const [input, setInput] = useState(''); //input from user
-  const [response, setResponse] = useState(""); //response from openai
   const selectOption = (selectedOption) => {
     setSelectedOption(selectedOption);
   }
@@ -132,7 +112,11 @@ function App({ user, signOut }) {
         { Object.values(selectedOption).length === 0 ? (
             <OptionSelection arrayItems = { arrayItems } selectOption={selectOption}/> 
         ) : (
-           <Translation doStuff={doStuff} setInput={setInput}/>
+          <Translation
+          handleUserMessage={handleUserMessage}
+          messagesList={messagesList}
+          addMessages={addMessages}
+        />
         )}
 
         <a
