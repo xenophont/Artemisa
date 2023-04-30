@@ -22,7 +22,8 @@
           "deploymentBucketName": "amplify-amplify468a9c1e54da4-staging-153229-deployment",
           "s3Key": "amplify-builds/askAI-5545687955444d306472-build.zip",
           "serviceUrl": "https://www.artemisasolutions.eu"
-        }
+        },
+        "APIGatewayAuthLambda": {}
       },
       "api": {
         "restApi": {}

@@ -49,6 +49,11 @@
     }
   },
   "function": {
+    "APIGatewayAuthLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "askAI": {
       "build": true,
       "dependsOn": [
