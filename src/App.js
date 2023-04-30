@@ -22,18 +22,6 @@ const apiName = config.aws_cloud_logic_custom[0].name;
 async function callAskAIStaging(jsonString) {
   // Obtén el objeto de sesión actual
   const session = await Auth.currentSession();
-  // Extrae el token de acceso del objeto de sesión
-  //const accessToken = session.getAccessToken().getJwtToken();
-  
-  //console.log(session);
-  //console.log(accessToken);
-  /*
-  //// Configura los encabezados con el token de acceso
-  const requestHeaders = {
-    'Authorization': `Bearer ${accessToken}`,
-    'Content-Type': 'application/json',
-  };
-  */
   const idToken = session.getIdToken().getJwtToken();
 /*
 {
@@ -52,14 +40,8 @@ async function callAskAIStaging(jsonString) {
     headers: requestHeaders,
     body: jsonString ,
   };
-  //console.log(requestHeaders);
-  /*try {   
-    const response = await API.post(apiName, '/askai-staging', {  
-      headers: requestHeaders,
-      body: jsonString ,
-    }); 
-*/
-    try {   
+  
+  try {   
     const response = await API.post(apiName, '/askai-staging', myInit);   
     // Maneja la respuesta de la función Lambda
     console.log(response);
@@ -70,9 +52,10 @@ async function callAskAIStaging(jsonString) {
 }
 
 
+
 function App({ user, signOut }) {
 
-  const messages = [
+ /* const messages = [
     { role: 'system', content: 'Estás chateando con un IA entrenada en una variedad de temas.' },
     { role: 'user', content: '¿Cuáles son los beneficios de la inteligencia artificial?' },
   ];
@@ -82,8 +65,38 @@ function App({ user, signOut }) {
   callAskAIStaging(jsonString).then((response) => {
     console.log('Respuesta de la función Lambda:', response);
   });
-  
+*/
+/*
+  // Lista de mensajes
+  const [messagesList, setMessagesList] = useState([]);
 
+  // Función para agregar mensajes a la lista
+  const addMessages = (newMessages) => {
+    setMessagesList([...messagesList, ...newMessages]);
+  };
+
+  // Función para transformar el formato de los mensajes
+  const transformMessageFormat = (inputObject) => {
+    const transformedMessages = Object.entries(inputObject.messages).map(([role, content]) => ({
+      role,
+      content,
+    }));
+    return transformedMessages;
+  };
+
+  // Ejemplo de cómo usar la función transformMessageFormat
+  const exampleInput = {
+    messages: {
+      system: 'You are an implementation manager from adyen. Ask me questions about my project such as channel, numbers of devs, and go-live date.',
+      user: 'Hello dear implementation manager. Shall we start?',
+    },
+  };
+  const transformedMessages = transformMessageFormat(exampleInput);
+  console.log('Transformed Messages:', transformedMessages);
+ 
+  addMessages(transformedMessages);
+  console.log('Mensajes en la lista:', messagesList);
+*/
   //const askOpenai = 'https://zdnqgio3sm3rr4oil75xgvhtby0ptzpd.lambda-url.eu-west-3.on.aws/';
   const [selectedOption, setSelectedOption] = useState({});
   const [input, setInput] = useState(''); //input from user
@@ -94,17 +107,13 @@ function App({ user, signOut }) {
 
   const doStuff = async () => {
     let object = {...selectedOption, prompt: input };
-    console.log(selectedOption);
-    /*
-    const res = await fetch(askOpenai, {
-      method: "POST",
-      body: JSON.stringify(selectedOption)
+    console.log(selectedOption.messages);
+    const jsonString = JSON.stringify({ messages: selectedOption.messages });
+    console.log(jsonString);
+    callAskAIStaging(jsonString).then((response) => {
+      console.log('Respuesta de la función Lambda:', response);
     });
-    const json = await res.json();
-    setResponse(json.response);
-    console.log(response);
-    console.log(response.data.choices[0].text);
-    */
+    
   }
 
   return (

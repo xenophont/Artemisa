@@ -20,14 +20,11 @@ export const arrayItems = [
         id: 'discussion',
         description: "Discuss topics with an Implementation Manager",
         option:{
-            "model": "text-curie-001",
-            "prompt": "",
-            "temperature": 0,
-            "max_tokens": 100,
-            "top_p": 1,
-            "frequency_penalty": 0.0,
-            "presence_penalty": 0.0,
-            "stop": ["\n"]
+            "option": 2,
+            "messages":[
+                { role: 'system', content: "You are an implementation manager from adyen. Ask me questions about my project such as channel, numbers of devs, and go-live date."},
+                { role: 'user', content: "Hello dear implementation manager. Shall we start?"}
+            ]
         }
     },
     {
@@ -35,10 +32,11 @@ export const arrayItems = [
         id: 'test',
         description: "I want to test the bot",
         option:{
-            "model": "text-davinci-003",
-            "prompt": "Say this is a test",
-            "max_tokens": 7,
-            "temperature": 0
+            "option": 2,
+            "messages":[
+                { role: 'system', content: "I want to test that this bot works. Always answer 'this is a test'."},
+                { role: 'user', content: "Hello dear implementation manager. Shall we start?"}
+            ]
           }
     },
     {
