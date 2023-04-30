@@ -25,7 +25,7 @@
         },
         "APIGatewayAuthLambda": {
           "deploymentBucketName": "amplify-amplify468a9c1e54da4-staging-153229-deployment",
-          "s3Key": "amplify-builds/APIGatewayAuthLambda-5342314545676d6c744b-build.zip"
+          "s3Key": "amplify-builds/APIGatewayAuthLambda-614a3861427a32796a50-build.zip"
         }
       },
       "api": {
