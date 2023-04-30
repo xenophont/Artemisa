@@ -1,147 +1,154 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,400&display=swap');
 
-.App {
-  text-align: center;
-}
-
-.heading {
-  font-family: 'Poppins', sans-serif;
-}
-
-.footer {
-  font-family: 'Poppins', sans-serif;
-  background-color: #212121;
-  color:whitesmoke;
-  font-weight: 200;
-  font-size: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 1rem;
-}
-
-.grid-main {
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 15px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.grid-child {
-  border: 1px solid whitesmoke;
-  border-radius: 15px;
-  padding: 10px;
-  cursor: pointer;
-  margin: 10px;
-}
-
-.grid-child:hover {
-  background-color: whitesmoke;
-  color: #212121;
-  box-shadow: 0 0 11px rgba(33,33,33,.2);
-}
-
-.grid-child h3{
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;  
-}
-
-.grid-child p{
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 15px;
-}
-
-.translation-area {
-  display: contents;
-}
-
-.chat-window {
-  width: 100%;
-  height: 300px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  overflow-y: auto;
-}
-
-.message {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.message.user {
-  text-align: right;
-}
-
-.message.system {
-  text-align: left;
-}
-
-
-.text-area {
-  font-size: 20px;
-  padding: 10px;
-  font-family: Poppins;
-}
-
-.action-btn {
-  width: 200px;
-  height: 50px;
-  font-size: 20px;
-  margin-top: 20px;
-  cursor: pointer ;
-}
-
-
-.userbar {
-  background-color: #212121;
-  color:white;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 1rem;
-  margin: 10;
-}
-
-.App-logo {
-  height: 40vmin;
-  margin-top: 40px;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .App {
+    text-align: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .heading {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .footer {
+    font-family: 'Poppins', sans-serif;
+    background-color: #212121;
+    color:whitesmoke;
+    font-weight: 200;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .grid-main {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 15px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .grid-child {
+    border: 1px solid whitesmoke;
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  .grid-child:hover {
+    background-color: whitesmoke;
+    color: #212121;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+  }
+
+  .grid-child h3{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;  
+  }
+
+  .grid-child p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .text-area {
+    font-size: 20px;
+    padding: 10px;
+    font-family: Poppins;
+  }
+
+  .action-btn {
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    margin-top: 20px;
+    cursor: pointer ;
+  }
+
+
+  .userbar {
+    background-color: #212121;
+    color:white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+    margin: 10;
+  }
+
+  .App-logo {
+    height: 40vmin;
+    margin-top: 40px;
+    pointer-events: none;
+  }
+
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .App-link {
+    color: #61dafb;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+  
+/* Estilos para pantallas pequeñas (móviles) */
+@media screen and (max-width: 768px) {
+  .App-logo {
+    height: 30vmin;
+  }
+
+  .grid-main {
+    grid-template-columns: auto;
+  }
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .App-logo {
+    height: 35vmin;
+  }
+
+  .grid-main {
+    grid-template-columns: auto auto;
+  }
+}
+
+/* Estilos para pantallas grandes (escritorio) */
+@media screen and (min-width: 1025px) {
+  .App-logo {
+    height: 40vmin;
+  }
+
+  .grid-main {
+    grid-template-columns: auto auto;
   }
 }

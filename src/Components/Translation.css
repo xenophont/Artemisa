@@ -1,0 +1,128 @@
+.translation-area {
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chat-window {
+  height: 400px;
+  overflow-y: scroll;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  font-size: 16px; /* Ajusta el tamaño de la fuente aquí */
+  white-space: pre-line; /* Asegura que los saltos de línea se muestren correctamente */
+}
+
+.input-area {
+  margin-top: 1rem;
+}
+
+.text-area {
+  width: 100%;
+  border-radius: 10px;
+  resize: none;
+}
+
+.message {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  text-indent: 0; /* Elimina el espacio adicional antes de cada mensaje */
+}
+
+.message.system {
+  color: #000000;
+}
+
+.message.assistant {
+  color: #006400;
+}
+
+.message.user {
+  color: #000000;
+  text-align: right; /* Alinea los mensajes del usuario a la derecha */
+}
+
+.action-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  background-color: #006400;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #004d00;
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media screen and (max-width: 768px) {
+  .translation-area {
+    max-width: 90%;
+  }
+
+  .chat-window {
+    height: 300px;
+    font-size: 14px;
+  }
+
+  .text-area {
+    font-size: 16px;
+  }
+
+  .action-btn {
+    font-size: 16px;
+    height: 40px;
+  }
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .translation-area {
+    max-width: 80%;
+  }
+
+  .chat-window {
+    height: 350px;
+    font-size: 15px;
+  }
+
+  .text-area {
+    font-size: 18px;
+  }
+
+  .action-btn {
+    font-size: 18px;
+    height: 45px;
+  }
+}
+
+/* Estilos para pantallas grandes (escritorio) */
+@media screen and (min-width: 1025px) {
+  .translation-area {
+    max-width: 600px;
+  }
+
+  .chat-window {
+    height: 400px;
+    font-size: 16px;
+  }
+
+  .text-area {
+    font-size: 20px;
+  }
+
+  .action-btn {
+    font-size: 20px;
+    height: 50px;
+  }
+}

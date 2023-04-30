@@ -54,12 +54,15 @@ function App({ user, signOut }) {
     const response = await callAskAIStaging(newMessagesList);
     console.log('Respuesta de la función Lambda:', response);
   
-    if (response && response.choices && response.choices.length > 0) {
-      const aiResponse = response.choices[0].text.trim();
-      const updatedMessagesList = [...newMessagesList, { role: 'ai', content: aiResponse }];
+    if (response && response.body && response.body.length > 0) {
+      const parsedResponse = JSON.parse(response.body);
+      const aiResponse = parsedResponse.message.trim();
+      const updatedMessagesList = [...newMessagesList, { role: 'assistant', content: aiResponse }];
       setMessagesList(updatedMessagesList);
     }
   };
+  
+  
 
   // Lista de mensajes
   const [messagesList, setMessagesList] = useState([]);

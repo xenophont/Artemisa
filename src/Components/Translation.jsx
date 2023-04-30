@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Translation.css';
 
 export default function Translation({ handleUserMessage, messagesList, addMessages }) {
   const [userInput, setUserInput] = useState('');
@@ -7,10 +8,34 @@ export default function Translation({ handleUserMessage, messagesList, addMessag
     setUserInput(e.target.value);
   };
 
-  const handleSubmit = () => {
+  function typeMessage(message, container, delay = 10) {
+    return new Promise((resolve) => {
+      let index = 0;
+      const interval = setInterval(() => {
+        container.textContent += message.charAt(index);
+        index += 1;
+        if (index >= message.length) {
+          clearInterval(interval);
+          resolve();
+        }
+      }, delay);
+    });
+  }
+
+  const handleSubmit = async () => {
     addMessages([{ role: 'user', content: userInput }]);
-    handleUserMessage(userInput);
+    const response = await handleUserMessage(userInput);
     setUserInput('');
+
+    if (response && response.content) {
+      const chatWindow = document.querySelector('.chat-window');
+      const aiMessageElement = document.createElement('div');
+      aiMessageElement.className = `message assistant`;
+      chatWindow.appendChild(aiMessageElement);
+
+      await typeMessage(response.content, aiMessageElement);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
   };
 
   return (
